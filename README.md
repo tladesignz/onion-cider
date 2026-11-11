@@ -185,7 +185,23 @@ Build dependencies and the Gecko engine.
 
 ```bash
 ./tools/development/build-idevice.sh
+
+# After system or Xcocde updates only: Install Mozilla's own LLVM build chain containing the lld linker, cbindgen and WASM targets.
+rm -rf ~/.mozbuild
+
+cd engine/firefox
+./mach bootstrap # choose option 2: Desktop build, no precompiled atifacts
+cd ../..
+
+# Remove iOS 27.1 target, which Mozilla's lld doesn't understand, yet.
+sudo ./tools/development/fix-ios27.sh patch
+
+# Run the build.
 ./tools/development/build-gecko.sh
+
+# Undo changes to iOS SDK again.
+sudo ./tools/development/fix-ios27.sh undo
+
 ```
 
 To run Reynard, open `Reynard.xcodeproj` in Xcode and build/run it from there.
