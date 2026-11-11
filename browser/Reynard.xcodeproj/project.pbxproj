@@ -13,6 +13,7 @@
 		02WCPBF12F3000000000001 /* Reynard Helper.appex in Embed Process Extensions */ = {isa = PBXBuildFile; fileRef = 02WCPAPP2F3000000000001 /* Reynard Helper.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		03OLPBF12F3100000000001 /* OpenIn.appex in Embed Process Extensions */ = {isa = PBXBuildFile; fileRef = 03OLAPP2F3100000000001 /* OpenIn.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0A21DA010000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 0A21DA010000000000000002 /* ZIPFoundation */; };
+		A0015F1830A33BDC000C4756 /* TorManager-iOS-UI in Frameworks */ = {isa = PBXBuildFile; productRef = A0015F1730A33BDC000C4756 /* TorManager-iOS-UI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0015F1830A33BDC000C4756 /* TorManager-iOS-UI in Frameworks */,
 				01GECKO0012F2F289C001F0001 /* GeckoView.framework in Frameworks */,
 				0A21DA010000000000000001 /* ZIPFoundation in Frameworks */,
 			);
@@ -272,6 +274,7 @@
 			buildPhases = (
 				018C679A2F2F289C001F0BBB /* Sources */,
 				018C679B2F2F289C001F0BBB /* Frameworks */,
+				A0015F2230A33F0B000C4756 /* Update GeoIP Files */,
 				018C679C2F2F289C001F0BBB /* Resources */,
 				01GECKO0042F2F289C001F0001 /* Embed Frameworks */,
 				02PROCOPY2F3000000000001 /* Embed Process Extensions */,
@@ -290,6 +293,7 @@
 			name = Reynard;
 			packageProductDependencies = (
 				0A21DA010000000000000002 /* ZIPFoundation */,
+				A0015F1730A33BDC000C4756 /* TorManager-iOS-UI */,
 			);
 			productName = Reynard;
 			productReference = 018C679E2F2F289C001F0BBB /* Reynard.app */;
@@ -403,6 +407,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0A21DA010000000000000003 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				A0015F1530A339AF000C4756 /* XCRemoteSwiftPackageReference "TorManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 018C679F2F2F289C001F0BBB /* Products */;
@@ -463,6 +468,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh \"${SRCROOT}/Scripts/AddGecko.sh\"\n";
+		};
+		A0015F2230A33F0B000C4756 /* Update GeoIP Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update GeoIP Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nDEST=\"$PROJECT_DIR/Reynard/Resources\"\n\nmkdir -p \"$DEST\"\ncd \"$DEST\"\n\n# Test if file is older then 1 week.\nOLD=\"$(find geoip -mmin +10080 2>/dev/null)\"\n\n# Only download, if files are not existing or older than 1 week.\nif [ ! -f geoip -o ! -z \"$OLD\" ]; then\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip6\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1119,6 +1143,14 @@
 				version = 0.9.20;
 			};
 		};
+		A0015F1530A339AF000C4756 /* XCRemoteSwiftPackageReference "TorManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tladesignz/TorManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1126,6 +1158,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A21DA010000000000000003 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		A0015F1730A33BDC000C4756 /* TorManager-iOS-UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0015F1530A339AF000C4756 /* XCRemoteSwiftPackageReference "TorManager" */;
+			productName = "TorManager-iOS-UI";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

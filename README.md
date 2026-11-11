@@ -193,7 +193,7 @@ cd engine/firefox
 ./mach bootstrap # choose option 2: Desktop build, no precompiled atifacts
 cd ../..
 
-# Remove iOS 27.1 target, which Mozilla's lld doesn't understand, yet.
+# Remove iOS 27 target, which Mozilla's lld doesn't understand, yet.
 sudo ./tools/development/fix-ios27.sh patch
 
 # Run the build.

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IPtProxyUI_iOS
 
 struct PrivacySettingsSection {
     enum Row: CaseIterable {
@@ -30,13 +31,13 @@ struct PrivacySettingsSection {
         case .httpsOnlyMode:
             return SettingsViewUtils.disclosureCell(title: NSLocalizedString("HTTPS-Only Mode", tableName: "SettingsLocalizable", comment: ""))
         case .dnsOverHTTPS:
-            return SettingsViewUtils.disclosureCell(title: NSLocalizedString("DNS over HTTPS", tableName: "SettingsLocalizable", comment: ""))
+            return SettingsViewUtils.disclosureCell(title: L10n.bridgeConfiguration)
         case .trackingProtection:
             return SettingsViewUtils.disclosureCell(title: NSLocalizedString("Tracking Protection", comment: ""))
         }
     }
     
-    func selectRow(at index: Int, from viewController: UIViewController) {
+    func selectRow(at index: Int, from viewController: UIViewController & BridgesConfDelegate) {
         guard Row.allCases.indices.contains(index) else {
             return
         }
@@ -49,7 +50,8 @@ struct PrivacySettingsSection {
             let destination = HTTPSOnlyModePreferencesViewController()
             viewController.navigationController?.pushViewController(destination, animated: true)
         case .dnsOverHTTPS:
-            let destination = DNSOverHTTPSPreferencesViewController()
+            let destination = BridgesConfViewController()
+            destination.delegate = viewController
             viewController.navigationController?.pushViewController(destination, animated: true)
         case .trackingProtection:
             let destination = TrackingProtectionPreferencesViewController()
