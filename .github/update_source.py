@@ -57,7 +57,7 @@ def build_versions(api_root: str, asset_name: str, releases: list[dict]) -> list
 def main() -> None:
 	api_root = "https://api.github.com/repos/tladesignz/onion-cider"
 	source_path = Path(__file__).with_name("source.json")
-	asset_name = "Onion Cider.ipa"
+	asset_name = "Onion.Cider.ipa"
 
 	source_data = json.loads(source_path.read_text(encoding="utf-8"))
 	source_data["apps"][0]["versions"] = build_versions(api_root, asset_name, gh_request(f"{api_root}/releases"))

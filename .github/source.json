@@ -5,7 +5,7 @@
   "subtitle": "Official AltStore Source for Onion Cider Browser",
   "description": "An experimental Tor-enabled, Gecko-based web browser for iOS 15+.",
   "tintColor": "#FB3728",
-  "iconURL": "https://github.com/user-attachments/assets/1c42dda2-b778-4342-9f94-8f852c3ad652",
+  "iconURL": "https://raw.githubusercontent.com/tladesignz/onion-cider/refs/heads/main/browser/Reynard/Resources/Assets.xcassets/AppIcon.appiconset/onion-cider.png",
   "apps": [
     {
       "name": "Onion Cider",

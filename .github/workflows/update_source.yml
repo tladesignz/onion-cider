@@ -32,7 +32,7 @@ jobs:
       run: |
         python .github/update_source.py
     
-    - name: Update apps.json in Release 1.0
+    - name: Update apps.json in Release 0.21.0
       uses: softprops/action-gh-release@v3
       with:
         tag_name: "0.21.0"
