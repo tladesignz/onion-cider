@@ -4,7 +4,7 @@
   "website": "https://github.com/tladesignz/onion-cider",
   "subtitle": "Official AltStore Source for Onion Cider Browser",
   "description": "An experimental Tor-enabled, Gecko-based web browser for iOS 15+.",
-  "tintColor": "#FB3728",
+  "tintColor": "#3E2B4F",
   "iconURL": "https://raw.githubusercontent.com/tladesignz/onion-cider/refs/heads/main/browser/Reynard/Resources/Assets.xcassets/AppIcon.appiconset/onion-cider.png",
   "apps": [
     {
@@ -13,8 +13,8 @@
       "developerName": "Die Netzarchitekten e.U.",
       "subtitle": "An experimental Tor-enabled, Gecko-based web browser for iOS 15+.",
       "localizedDescription": "Onion Cider is a Tor-enabled, Gecko-based mobile web browser for iOS 15+.\n\nUnlike other browsers on iOS that are forced to use Apple's WebKit engine (including Safari and all third-party browsers), Onion Cider uses Gecko. This is the same engine that powers the Firefox browser on desktop and Android devices.\n\n Additionally, it contains a Tor client and support for different bridge types. \n\nSource code is available on GitHub at https://github.com/tladesignz/onion-cider.",
-      "iconURL": "https://github.com/user-attachments/assets/1c42dda2-b778-4342-9f94-8f852c3ad652",
-      "tintColor": "#FB3728",
+      "iconURL": "https://raw.githubusercontent.com/tladesignz/onion-cider/refs/heads/main/browser/Reynard/Resources/Assets.xcassets/AppIcon.appiconset/onion-cider.png",
+      "tintColor": "#3E2B4F",
       "category": "other",
       "screenshotURLs": [
         "https://raw.githubusercontent.com/tladesignz/onion-cider/refs/heads/main/misc/screenshot-1.png",
