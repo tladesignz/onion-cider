@@ -74,7 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		018C679E2F2F289C001F0BBB /* Reynard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reynard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		018C679E2F2F289C001F0BBB /* Onion Cider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Onion Cider.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01GECKO0002F2F289C001F0001 /* GeckoView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GeckoView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01GECKO0052F2F289C001F0001 /* Reynard.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Reynard.xcconfig; sourceTree = "<group>"; };
 		02WCPAPP2F3000000000001 /* Reynard Helper.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Reynard Helper.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +82,8 @@
 		A0A009E6300A65FC002CCA16 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = SOURCE_ROOT; };
 		A0A009E7300A65FC002CCA16 /* LICENSE.firefox */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.firefox; path = ../LICENSE.firefox; sourceTree = SOURCE_ROOT; };
 		A0A00B63300A65FD002CCA16 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
+		A0F106C230A5CF3C00F37AD6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = SOURCE_ROOT; };
+		A0F106C330A5CF3C00F37AD6 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -181,6 +183,18 @@
 			path = ../tools;
 			sourceTree = SOURCE_ROOT;
 		};
+		A0F106C130A5CF3C00F37AD6 /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			name = .github;
+			path = ../.github;
+			sourceTree = SOURCE_ROOT;
+		};
+		A0F1078430A5E10800F37AD6 /* misc */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			name = misc;
+			path = ../misc;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +236,10 @@
 		018C67952F2F289C001F0BBB = {
 			isa = PBXGroup;
 			children = (
+				A0F106C130A5CF3C00F37AD6 /* .github */,
+				A0F1078430A5E10800F37AD6 /* misc */,
+				A0F106C230A5CF3C00F37AD6 /* .gitignore */,
+				A0F106C330A5CF3C00F37AD6 /* .gitmodules */,
 				A0A009E6300A65FC002CCA16 /* LICENSE */,
 				A0A009E7300A65FC002CCA16 /* LICENSE.firefox */,
 				A0A00B62300A65FD002CCA16 /* patches */,
@@ -239,7 +257,7 @@
 		018C679F2F2F289C001F0BBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				018C679E2F2F289C001F0BBB /* Reynard.app */,
+				018C679E2F2F289C001F0BBB /* Onion Cider.app */,
 				01GECKO0002F2F289C001F0001 /* GeckoView.framework */,
 				02WCPAPP2F3000000000001 /* Reynard Helper.appex */,
 				03OLAPP2F3100000000001 /* OpenIn.appex */,
@@ -296,7 +314,7 @@
 				A0015F1730A33BDC000C4756 /* TorManager-iOS-UI */,
 			);
 			productName = Reynard;
-			productReference = 018C679E2F2F289C001F0BBB /* Reynard.app */;
+			productReference = 018C679E2F2F289C001F0BBB /* Onion Cider.app */;
 			productType = "com.apple.product-type.application";
 		};
 		01GECKO0012F2F289C001F0002 /* GeckoView */ = {
@@ -596,7 +614,7 @@
 					"-Wl,-hidden-lidevice_ffi",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_MAIN)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(APP_DISPLAY_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "$(PROVISIONING_PROFILE_SPECIFIER_MAIN)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -664,7 +682,7 @@
 					"-Wl,-hidden-lidevice_ffi",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_MAIN)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(APP_DISPLAY_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "$(PROVISIONING_PROFILE_SPECIFIER_MAIN)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";

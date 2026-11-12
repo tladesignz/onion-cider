@@ -6,7 +6,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Before you fill out this bug report, please read **[the Reynard Browser FAQ](https://github.com/minh-ton/reynard-browser/issues/130) and [search in GitHub Issues](https://github.com/minh-ton/reynard-browser/issues)** for the bug you are experiencing.
+      Before you fill out this bug report, please read **[the Reynard Browser FAQ](https://github.com/minh-ton/reynard-browser/issues/130) (which Onion Cider is based on) and search the GitHub issues for [Reynard](https://github.com/minh-ton/reynard-browser/issues)** AND [Onion Cider](https://github.com/tladesignz/onion-cider/issues)for the bug you are experiencing.
 
 - type: checkboxes
   attributes:
@@ -58,15 +58,15 @@ body:
     label: Platform
     description: |
       Examples:
-        - **iOS version**: 26.1
+        - **iOS version**: 72.2
         - **Device model**: iPhone 13 mini
         - **Sideloading method**: SideStore
-        - **Reynard Browser version**: 0.4.0
+        - **Onion Cider version**: 0.21.0
     value: |
         - iOS version:
         - Device model: 
         - Sideloading method:
-        - Reynard Browser version: 
+        - Onion Cider version:
   validations:
     required: true
 
@@ -74,11 +74,11 @@ body:
   attributes:
     label: Verify steps
     options:
-      - label: I have the latest version of Reynard Browser.
+      - label: I have the latest version of Onion Cider.
         required: true
-      - label: I use the official build of Reynard Browser from GitHub releases.
+      - label: I use the official build of Onion Cider from GitHub releases.
         required: true
-      - label: I have read the installation instructions and have followed all of the steps to install Reynard Browser correctly.
+      - label: I have read the installation instructions and have followed all of the steps to install Onion Cider correctly.
         required: true
   validations:
     required: true

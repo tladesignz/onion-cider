@@ -13,8 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let browserViewController = BrowserViewController()
-        browserViewController.sessionManager.setApplicationForeground(scene.activationState != .background)
+//        let browserViewController = BrowserViewController()
+//        browserViewController.sessionManager.setApplicationForeground(scene.activationState != .background)
         
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = AppAppearanceController.userInterfaceStyle(for: Prefs.AppearanceSettings.appAppearance)

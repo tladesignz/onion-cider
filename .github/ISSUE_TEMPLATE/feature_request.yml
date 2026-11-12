@@ -6,7 +6,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Before you fill out this feature request, please **[search in GitHub Issues](https://github.com/minh-ton/reynard-browser/issues)** to see if your feature has already been requested.
+      Before you fill out this feature request, please **[search in GitHub Issues](https://github.com/tladesignz/onion-cider/issues)** to see if your feature has already been requested. NOTE that this project follows the upstream [Reynard Browser](https://github.com/minh-ton/reynard-browser). Any general features should be asked there. Here we will only deal with Tor-related things!
 
 - type: checkboxes
   attributes:
@@ -21,7 +21,7 @@ body:
   attributes:
     label: Describe the feature request or improvement you want to see
     description: |
-      A clear and concise description of the feature request or improvement you want to see in Reynard Browser. 
+      A clear and concise description of the feature request or improvement you want to see in Onion Cider. 
       
       Try to be as specific as possible and include any relevant details that could help the developer understand your request. You can also include screenshots or mockups if you have any ideas on how the feature should look like.
   validations:

@@ -1,12 +1,12 @@
 name: Question
-description: 'Ask a question about using Reynard Browser or its development.'
+description: 'Ask a question about using Onion Cider or its development.'
 title: "[Question] <Short description>"
 labels: [question]
 body:
 - type: markdown
   attributes:
     value: |
-      Before you fill out this question form, please **[search in GitHub Issues](https://github.com/minh-ton/reynard-browser/issues)** to see if your question has already been asked. If this is a bug that you are experiencing, please report it in a bug report instead of asking about it here.
+      Before you fill out this question form, please **[search in GitHub issues](https://github.com/tladesignz/onion-cider/issues)** to see if your question has already been asked. If this is a bug that you are experiencing, please report it in a bug report instead of asking about it here.
 
 - type: checkboxes
   attributes:
