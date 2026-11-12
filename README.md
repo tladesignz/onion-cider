@@ -1,4 +1,4 @@
-<img width="100" height="100" src="https://github.com/user-attachments/assets/1c42dda2-b778-4342-9f94-8f852c3ad652" />
+<img width="100" height="100" src="https://raw.githubusercontent.com/tladesignz/onion-cider/refs/heads/main/browser/Reynard/Resources/Assets.xcassets/AppIcon.appiconset/onion-cider.png" />
 
 # Onion Cider
 
