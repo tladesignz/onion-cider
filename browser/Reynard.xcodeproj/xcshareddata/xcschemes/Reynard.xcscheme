@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "018C679D2F2F289C001F0BBB"
-               BuildableName = "Reynard.app"
+               BuildableName = "Onion Cider.app"
                BlueprintName = "Reynard"
                ReferencedContainer = "container:Reynard.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "018C679D2F2F289C001F0BBB"
-            BuildableName = "Reynard.app"
+            BuildableName = "Onion Cider.app"
             BlueprintName = "Reynard"
             ReferencedContainer = "container:Reynard.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "018C679D2F2F289C001F0BBB"
-            BuildableName = "Reynard.app"
+            BuildableName = "Onion Cider.app"
             BlueprintName = "Reynard"
             ReferencedContainer = "container:Reynard.xcodeproj">
          </BuildableReference>
