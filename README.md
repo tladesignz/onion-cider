@@ -23,7 +23,7 @@ For common questions and troubleshooting, see the [FAQ](https://github.com/minh-
 
 Make sure to select **Keep App Extensions** during installation, as Onion Cider will not work without them.
 
-You can also [click here](https://altdirect.app/?url=https://github.com/tladesignz/onion-cider/releases/download/0.21.0/source.json&exclude=livecontainer,stikstore,trollapps,feather) to add the AltSource for Reynard to AltStore or SideStore.
+You can also [click here](https://altdirect.app/?url=https://onionbrowser.com/assets/source.json&exclude=livecontainer,stikstore,trollapps,feather) to add the AltSource for Reynard to AltStore or SideStore.
 
 > [!IMPORTANT]
 > - **LiveContainer is not supported** due to its own limitations.
