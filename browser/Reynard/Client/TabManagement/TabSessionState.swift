@@ -1,5 +1,5 @@
 //
-//  TabState.swift
+//  TabSessionState.swift
 //  Reynard
 //
 //  Created by Minh Ton on 16/6/26.
@@ -42,17 +42,6 @@ enum TabDisplayState: Equatable {
     case pending(String)
 }
 
-enum TabInsertionTarget: Equatable {
-    case end
-    case afterSelected
-    case index(Int)
-}
-
-enum HistoryNavigationDirection {
-    case back
-    case forward
-}
-
 final class TabSessionState {
     var readerMode = ReaderModeState()
     var tabSessionState: GeckoSessionState?
@@ -60,16 +49,26 @@ final class TabSessionState {
     var suppressInitialNavigation = true
     var isSuppressingInitialBlankPageLoad = false
     var openerTabID: UUID?
-    var sessionNavigationAvailability = SessionNavigationAvailability.unavailable
     var navigationState = NavigationAvailability(canGoBack: false, canGoForward: false)
-    var pendingHistoryNavigations: [HistoryNavigationDirection] = []
-    var lastHistoryNavigationID = 0
-    var activeHistoryNavigationID: Int?
     var preparedNavigationThumbnailURL: String?
+    var committedEngineURL: String?
+    var displayedHistoryEntry: GeckoSessionHistoryIdentifier?
     var displayState: TabDisplayState = .committed
     var loadingState = TabLoadingState.idle
     var loadError: WebRequestError?
     var isPlayingAudio = false
     var showsStartupHomepage = false
     var selectionOrder = 0
+}
+
+extension TabSessionState {
+    var matchingHistoryEntry: GeckoSessionHistoryIdentifier? {
+        guard let tabSessionState,
+              let currentHistoryIndex = tabSessionState.currentHistoryIndex,
+              let entry = tabSessionState.history[safe: currentHistoryIndex],
+              entry.url == committedEngineURL else {
+            return nil
+        }
+        return entry.identifier
+    }
 }

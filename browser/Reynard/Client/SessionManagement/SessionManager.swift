@@ -10,8 +10,13 @@ import GeckoView
 import UIKit
 
 final class SessionManager {
+    struct SessionHandoff {
+        let pageBackgroundColor: UIColor?
+        let externalResponseReferenceCount: Int?
+        let websiteModeOverrides: [String: Bool]?
+    }
+    
     private let sessionSettings: SessionSettingsManager
-    private let history: NavigationHistory
     private let tabStore: TabManagementStore
     private let permissionStore: SitePermissionStore
     let universalLinkManager = UniversalLinkManager()
@@ -34,13 +39,11 @@ final class SessionManager {
     
     init(
         sessionSettings: SessionSettingsManager = SessionSettingsManager(),
-        history: NavigationHistory = NavigationHistory(),
         tabStore: TabManagementStore = .shared,
         permissionStore: SitePermissionStore = .shared,
         trackingProtection: TrackingProtectionManager = TrackingProtectionManager()
     ) {
         self.sessionSettings = sessionSettings
-        self.history = history
         self.tabStore = tabStore
         self.permissionStore = permissionStore
         self.trackingProtection = trackingProtection
@@ -119,6 +122,35 @@ final class SessionManager {
         session.setActive(false)
     }
     
+    func detach(_ session: GeckoSession, forTab tabID: UUID) -> SessionHandoff {
+        let identifier = ObjectIdentifier(session)
+        deactivate(session)
+        trackingProtection.removeSession(session)
+        
+        return SessionHandoff(
+            pageBackgroundColor: pageBackgroundColors.removeValue(forKey: identifier),
+            externalResponseReferenceCount: externalResponseReferenceCounts.removeValue(forKey: identifier),
+            websiteModeOverrides: sessionSettings.websiteMode.takeWebsiteOverrides(for: tabID)
+        )
+    }
+    
+    func attach(
+        _ session: GeckoSession,
+        asTab tabID: UUID,
+        handoff: SessionHandoff,
+        delegates: SessionDelegates
+    ) {
+        let identifier = ObjectIdentifier(session)
+        pageBackgroundColors[identifier] = handoff.pageBackgroundColor
+        externalResponseReferenceCounts[identifier] = handoff.externalResponseReferenceCount
+        sessionSettings.websiteMode.restoreWebsiteOverrides(handoff.websiteModeOverrides, for: tabID)
+        bindDelegates(to: session, delegates: delegates)
+        
+        Task { @MainActor [weak self] in
+            await self?.trackingProtection.refreshBlockedTrackers(for: session)
+        }
+    }
+    
     // MARK: - Application Lifecycle
     
     func setApplicationForeground(_ isForeground: Bool) {
@@ -132,7 +164,6 @@ final class SessionManager {
     }
     
     func applicationWillResignActive() {
-        history.flushPendingWrites()
         isApplicationActive = false
         persistSessionState()
     }
@@ -269,7 +300,7 @@ final class SessionManager {
     ) {
         sessionSettings.websiteMode.clearWebsiteOverrides(for: tabID)
         if !keepingHistory {
-            history.removeHistory(for: tabID)
+            NavigationHistoryStore.shared.removeThumbnails(for: tabID)
         }
         closeImmediately(session)
     }
@@ -282,17 +313,6 @@ final class SessionManager {
     
     func setPageBackgroundColor(_ color: UIColor, for session: GeckoSession) {
         pageBackgroundColors[ObjectIdentifier(session)] = color
-    }
-    
-    // MARK: - Addon Tab State
-    
-    func setAddonTabActive(_ active: Bool, for session: GeckoSession) {
-        session.setAddonTabActive(active)
-    }
-    
-    func transferAddonTabActivation(from previousSession: GeckoSession, to replacementSession: GeckoSession) {
-        setAddonTabActive(false, for: previousSession)
-        setAddonTabActive(true, for: replacementSession)
     }
     
     // MARK: - Website Settings
@@ -326,90 +346,5 @@ final class SessionManager {
             requestedURL: requestedURL,
             tabID: tabID
         )
-    }
-    
-    // MARK: - Navigation
-    
-    func restoreNavigation(for tabID: UUID) -> NavigationAvailability {
-        return history.restoreState(for: tabID)
-    }
-    
-    func navigationAvailability(
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationAvailability {
-        return history.availability(for: tabID, sessionState: sessionState)
-    }
-    
-    func navigationHistory(for tabID: UUID) -> NavigationHistoryStore.Snapshot {
-        return history.snapshot(for: tabID)
-    }
-    
-    func usesStoredNavigationHistory(for tabID: UUID) -> Bool {
-        return history.usesStoredHistory(for: tabID)
-    }
-    
-    func recordNavigation(
-        to url: String,
-        title: String,
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationAvailability {
-        return history.record(to: url, title: title, for: tabID, sessionState: sessionState)
-    }
-    
-    func goBack(
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationTransition? {
-        return history.goBack(for: tabID, sessionState: sessionState)
-    }
-    
-    func goBack(
-        to index: Int,
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationTransition? {
-        return history.goBack(to: index, for: tabID, sessionState: sessionState)
-    }
-    
-    func goForward(
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationTransition? {
-        return history.goForward(for: tabID, sessionState: sessionState)
-    }
-    
-    func goForward(
-        to index: Int,
-        for tabID: UUID,
-        sessionState: SessionNavigationAvailability
-    ) -> NavigationTransition? {
-        return history.goForward(to: index, for: tabID, sessionState: sessionState)
-    }
-    
-    func useStoredNavigationHistory(for tabID: UUID) -> NavigationAvailability {
-        return history.useStoredHistory(for: tabID)
-    }
-    
-    func updateCurrentHistoryTitle(_ title: String, for tabID: UUID, matching url: String) {
-        history.updateCurrentHistoryTitle(title, for: tabID, matching: url)
-    }
-    
-    func updateCurrentHistoryThumbnail(
-        _ image: UIImage?,
-        for tabID: UUID,
-        matching url: String,
-        completion: @escaping () -> Void
-    ) {
-        history.updateCurrentHistoryThumbnail(image, for: tabID, matching: url, completion: completion)
-    }
-    
-    func navigationPreviewImages(for tabID: UUID) -> NavigationPreviewImages {
-        return history.previewImages(for: tabID)
-    }
-    
-    func invalidateNavigationThumbnails() {
-        history.invalidateThumbnails()
     }
 }

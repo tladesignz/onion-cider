@@ -31,7 +31,7 @@ struct ContextMenuTabActions {
     ) {
         switch disposition {
         case .currentTab:
-            tabManager.replaceSelectedSession(with: session, url: url, title: title)
+            tabManager.adoptPreview(session, url: url, title: title)
             
         case .newTab, .backgroundTab:
             tabManager.addTransferredSession(
@@ -45,14 +45,11 @@ struct ContextMenuTabActions {
             
         case .newPrivateTab:
             sessionManager.close(session)
-            let tabIndex = tabManager.createTab(
+            let tab = tabManager.createTab(
                 selecting: true,
                 target: tabManager.selectedTabMode == .private ? .afterSelected : .end,
                 mode: .private
             )
-            guard let tab = tabManager.privateTabs[safe: tabIndex] else {
-                return
-            }
             tabManager.browse(to: url, in: tab)
         }
     }

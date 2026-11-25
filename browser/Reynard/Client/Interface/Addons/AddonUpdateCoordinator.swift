@@ -16,12 +16,14 @@ struct AddonUpdateBatchResult {
 }
 
 final class AddonUpdateCoordinator {
+    static let shared = AddonUpdateCoordinator()
+    
     private var shouldRunAutomaticCheck: Bool
     private var isRunningBatch = false
     private var shouldPresentUpdatePrompts = false
     private var isSettingsVisible = false
     
-    init() {
+    private init() {
         if let lastGlobalCheckAt = Prefs.AddonSettings.lastGlobalCheckAt {
             shouldRunAutomaticCheck = Date().timeIntervalSince(lastGlobalCheckAt) >= 12 * 60 * 60
         } else {
@@ -56,6 +58,13 @@ final class AddonUpdateCoordinator {
         _ prompt: AddonPermissionPrompt,
         presentPrompt: @escaping (AddonPermissionPrompt) async -> AddonPermissionPromptResponse
     ) async -> AddonPermissionPromptResponse {
+        let hasNewPermissions = AddonPermissionSupport.updatePermissionDescription(for: prompt.permissions + prompt.origins) != nil
+        let hasNewDataCollection = AddonPermissionSupport.updateDataCollectionDescription(for: prompt.dataCollectionPermissions) != nil
+        
+        guard hasNewPermissions || hasNewDataCollection else {
+            return AddonPermissionPromptResponse(allow: true)
+        }
+        
         guard shouldPresentUpdatePrompts && isSettingsVisible else {
             markNeedsApproval(prompt.addon.id)
             return .deny
@@ -104,8 +113,8 @@ final class AddonUpdateCoordinator {
                     clearPendingApproval(addon.id)
                 }
             } catch {
-                if AddonErrorPresenter.updateRequiresPermissions(error) {
-                    markNeedsApproval(addon.id)
+                if AddonErrorPresenter.updateIsPostponed(error) {
+                    clearPendingApproval(addon.id)
                 }
             }
         }
@@ -160,10 +169,11 @@ final class AddonUpdateCoordinator {
                     }
                 }
             } catch {
-                if AddonErrorPresenter.updateRequiresPermissions(error) {
-                    markNeedsApproval(addon.id)
+                if AddonErrorPresenter.updateIsPostponed(error) {
+                    updatedCount += 1
+                    clearPendingApproval(addon.id)
                     await MainActor.run {
-                        status(addon.id, NSLocalizedString("Needs Permission to Update", comment: ""))
+                        status(addon.id, NSLocalizedString("Restart to Finish Updating", comment: ""))
                     }
                     continue
                 }
