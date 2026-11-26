@@ -48,6 +48,12 @@ cd onion-cider
 Download Gecko and apply patches.
 
 ```bash
+cd engine/firefox
+git restore --stage .
+git restore .
+git clean -fdx
+cd ../..
+
 ./tools/development/update-gecko.sh
 ./tools/development/apply-patches.sh
 ```

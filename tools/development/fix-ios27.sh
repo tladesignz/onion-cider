@@ -54,6 +54,7 @@ LIBS=(
     "System/Library/Frameworks/CoreHaptics.framework/CoreHaptics.tbd"
     "System/Library/Frameworks/GameController.framework/GameController.tbd"
     "System/Library/Frameworks/CoreMIDI.framework/CoreMIDI.tbd"
+    "System/Library/Frameworks/AVKit.framework/AVKit.tbd"
 )
 
 # --- Functions ---
