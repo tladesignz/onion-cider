@@ -79,6 +79,7 @@
 		01GECKO0052F2F289C001F0001 /* Reynard.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Reynard.xcconfig; sourceTree = "<group>"; };
 		02WCPAPP2F3000000000001 /* Reynard Helper.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Reynard Helper.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03OLAPP2F3100000000001 /* OpenIn.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenIn.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A09779FE30B86C80009B3EF8 /* build-onion-cider-dist.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "build-onion-cider-dist.sh"; path = "../build-onion-cider-dist.sh"; sourceTree = SOURCE_ROOT; };
 		A0A009E6300A65FC002CCA16 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = SOURCE_ROOT; };
 		A0A009E7300A65FC002CCA16 /* LICENSE.firefox */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.firefox; path = ../LICENSE.firefox; sourceTree = SOURCE_ROOT; };
 		A0A00B63300A65FD002CCA16 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
@@ -244,6 +245,7 @@
 				A0A009E7300A65FC002CCA16 /* LICENSE.firefox */,
 				A0A00B62300A65FD002CCA16 /* patches */,
 				A0A00B63300A65FD002CCA16 /* README.md */,
+				A09779FE30B86C80009B3EF8 /* build-onion-cider-dist.sh */,
 				A0A00B6D300A65FD002CCA16 /* tools */,
 				01E7AF522F2F9C42002DEC89 /* Configuration */,
 				01GECKO0082F2F289C001F0001 /* GeckoView */,
