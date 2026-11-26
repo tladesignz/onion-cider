@@ -29,6 +29,14 @@ extension SceneDelegate: StartTorViewControllerDelegate {
         return startVc
     }
 
+    func getStartWindow(_ windowScene: UIWindowScene) -> UIWindow {
+        let window = UIWindow(windowScene: windowScene)
+        window.overrideUserInterfaceStyle = AppAppearanceController.userInterfaceStyle(for: Prefs.AppearanceSettings.appAppearance)
+        window.rootViewController = startVc
+        window.makeKeyAndVisible()
+
+        return window
+    }
 
     func started() {
         Settings.firstRunDone = true
@@ -53,10 +61,7 @@ extension SceneDelegate: StartTorViewControllerDelegate {
             log.error("No port available!")
         }
 
-        let browserViewController = BrowserViewController()
-        browserViewController.sessionManager.setApplicationForeground(window?.windowScene?.activationState != .background)
-
-        window?.rootViewController = browserViewController
+        window = browserWindow?.window
     }
 }
 

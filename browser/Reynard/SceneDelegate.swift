@@ -9,14 +9,14 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    private var browserWindow: BrowserWindow?
+    var browserWindow: BrowserWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let draggedTabID = connectionOptions.userActivities.lazy.compactMap(\.draggedTabID).first
         let browserWindow = BrowserWindowManager.shared.connect(windowScene, draggedTabID: draggedTabID)
-        window = browserWindow.window
+        window = getStartWindow(windowScene)
         self.browserWindow = browserWindow
         
         handleIncomingURLContexts(connectionOptions.urlContexts)
